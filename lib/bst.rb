@@ -1,10 +1,18 @@
 
 class Tree
-  def initialize(array=nil)
-    @root = nil
+  def initialize(array)
+    @root = build_tree(array.uniq.sort)
   end
 
   def build_tree(array)
+    return nil if array.nil? or array.empty?
+
+    mid = array.length / 2
+    root = Node.new array[mid]
+
+    root.left = build_tree array.slice(...mid)
+    root.right = build_tree array.slice((mid + 1)..)
+    root
   end
 
   def insert(data)
@@ -52,7 +60,7 @@ end
 class Node
   include Comparable
   
-  attr_accessor :data
+  attr_accessor :data, :left, :right
   
   def <=>(other)
     @data <=> other.data
