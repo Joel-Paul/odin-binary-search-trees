@@ -20,12 +20,12 @@ class Tree
     while true
       case data <=> node.data
       when -1
-        node.left = Node.new data if node.left.nil?
+        node.left = Node.new data unless node.left
         node = node.left
       when 0
         return
       when 1
-        node.right = Node.new data if node.right.nil?
+        node.right = Node.new data unless node.right
         node = node.right
       end
     end
