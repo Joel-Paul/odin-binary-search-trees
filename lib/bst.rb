@@ -32,6 +32,9 @@ class Tree
   end
 
   def delete(data)
+    # 1. Find successor
+    # 2. Swap
+    # 3. Delete
   end
 
   def find(data)
