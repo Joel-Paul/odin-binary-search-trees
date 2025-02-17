@@ -16,6 +16,19 @@ class Tree
   end
 
   def insert(data)
+    node = @root
+    while true
+      case data <=> node.data
+      when -1
+        node.left = Node.new data if node.left.nil?
+        node = node.left
+      when 0
+        return
+      when 1
+        node.right = Node.new data if node.right.nil?
+        node = node.right
+      end
+    end
   end
 
   def delete(data)
