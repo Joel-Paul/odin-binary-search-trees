@@ -68,6 +68,19 @@ class Tree
   end
 
   def level_order
+    q = [@root]
+    order = []
+    until q.empty?
+      node = q.pop
+      if block_given?
+        yield node.data
+      else
+        order << node.data
+      end
+      q.prepend node.left if node.left
+      q.prepend node.right if node.right
+    end
+    order
   end
 
   def inorder
