@@ -34,4 +34,6 @@ BST.pretty_print
 # p BST.postorder
 # BST.postorder { |data| puts "mega #{data}"}
 
-puts BST.height BST.find 67
+# puts BST.height BST.find 67
+
+puts BST.depth BST.find 324

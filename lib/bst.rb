@@ -129,7 +129,21 @@ class Tree
     [left, right].max + 1
   end
 
-  def depth
+  def depth(node)
+    current = @root
+    depth = 0
+    until current.nil?
+      case node.data <=> current.data
+      when -1
+        current = current.left
+      when 0
+        return depth
+      when 1
+        current = current.right
+      end
+      depth += 1
+    end
+    nil
   end
 
   def balanced?
