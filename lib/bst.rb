@@ -122,7 +122,11 @@ class Tree
     order
   end
 
-  def height
+  def height(node = @root)
+    return 0 if node.leaf?
+    left = node.left ? height(node.left) : 0
+    right = node.right ? height(node.right) : 0
+    [left, right].max + 1
   end
 
   def depth
@@ -194,6 +198,10 @@ class Node
 
   def first_child
     @left.nil? ? @right : @left
+  end
+
+  def leaf?
+    first_child.nil?
   end
 end
 
