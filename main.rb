@@ -28,5 +28,8 @@ BST.pretty_print
 # p BST.inorder
 # BST.inorder { |data| puts "MY ORDER IS #{data}"}
 
-p BST.preorder
-BST.preorder { |data| puts "a number #{data}"}
+# p BST.preorder
+# BST.preorder { |data| puts "a number #{data}"}
+
+p BST.postorder
+BST.postorder { |data| puts "mega #{data}"}

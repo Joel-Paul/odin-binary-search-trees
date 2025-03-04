@@ -109,7 +109,17 @@ class Tree
     order
   end
 
-  def postorder
+  def postorder(node = @root, order = [], &block)
+    return if node.nil?
+
+    postorder(node.left, order, &block)
+    postorder(node.right, order, &block)
+    if block_given?
+      block.call node.data
+    else
+      order << node.data
+    end
+    order
   end
 
   def height
