@@ -32,12 +32,39 @@ class Tree
   end
 
   def delete(data)
-    # 1. Find successor
-    # 2. Swap
-    # 3. Delete
+    node = find data
+    parent = find_parent data
+
+    case node.children
+    when 0, 1
+      child = node.first_child
+      if node == @root
+        @root = child
+      else
+        parent.left = child if parent.left == node
+        parent.right = child if parent.right == node
+      end
+    when 2
+      successor = find_successor data
+      successor_parent = find_parent successor.data
+      successor_parent.left = successor.right
+      node.data = successor.data  # Copy the successor data and delete it
+    end
   end
 
   def find(data)
+    node = @root
+    until node.nil?
+      case data <=> node.data
+      when -1
+        node = node.left
+      when 0
+        return node
+      when 1
+        node = node.right
+      end
+    end
+    nil
   end
 
   def level_order
@@ -69,6 +96,36 @@ class Tree
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
+
+  def find_parent(data)
+    parent = @root
+
+    if parent.nil? or parent.data == data
+      return nil
+    end
+
+    until parent.nil? or 
+        (parent.left and parent.left.data == data) or
+        (parent.right and parent.right.data == data)
+      case data <=> parent.data
+      when -1
+        parent = parent.left
+      when 0
+        return nil
+      when 1
+        parent = parent.right
+      end
+    end
+    parent
+  end
+
+  def find_successor(data)
+    successor = (find data).right
+    until successor.nil? or successor.left.nil?
+      successor = successor.left
+    end
+    successor
+  end
  
 end
 
@@ -86,6 +143,14 @@ class Node
     @data = data
     @left = nil
     @right = nil
+  end
+
+  def children
+    (@left.nil? ? 0 : 1) + (@right.nil? ? 0 : 1)
+  end
+
+  def first_child
+    @left.nil? ? @right : @left
   end
 end
 
