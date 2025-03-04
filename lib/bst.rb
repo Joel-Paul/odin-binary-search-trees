@@ -83,16 +83,16 @@ class Tree
     order
   end
 
-  def inorder(node = @root, order = [])
+  def inorder(node = @root, order = [], &block)
     return if node.nil?
 
-    inorder(node.left, order)
+    inorder(node.left, order, &block)
     if block_given?
-      yield node.data
+      block.call node.data
     else
       order << node.data
     end
-    inorder(node.right, order)
+    inorder(node.right, order, &block)
     order
   end
 
