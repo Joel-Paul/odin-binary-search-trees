@@ -54,6 +54,6 @@ BST.delete 7
 BST.pretty_print
 puts BST.balanced?
 
-# BST.rebalance
-# BST.pretty_print
-# puts BST.balanced?
+BST.rebalance
+BST.pretty_print
+puts BST.balanced?
