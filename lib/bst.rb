@@ -83,7 +83,17 @@ class Tree
     order
   end
 
-  def inorder
+  def inorder(node = @root, order = [])
+    return if node.nil?
+
+    inorder(node.left, order)
+    if block_given?
+      yield node.data
+    else
+      order << node.data
+    end
+    inorder(node.right, order)
+    order
   end
 
   def preorder
