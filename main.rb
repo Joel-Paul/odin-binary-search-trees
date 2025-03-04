@@ -36,4 +36,15 @@ BST.pretty_print
 
 # puts BST.height BST.find 67
 
-puts BST.depth BST.find 324
+# puts BST.depth BST.find 324
+
+puts BST.balanced?
+
+BST.delete 1
+BST.delete 5
+BST.delete 3
+# BST.delete 7
+BST.delete 4
+BST.pretty_print
+puts BST.balanced?
+

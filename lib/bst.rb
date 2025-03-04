@@ -123,7 +123,7 @@ class Tree
   end
 
   def height(node = @root)
-    return 0 if node.leaf?
+    return 0 if node.nil? or node.leaf?
     left = node.left ? height(node.left) : 0
     right = node.right ? height(node.right) : 0
     [left, right].max + 1
@@ -146,7 +146,16 @@ class Tree
     nil
   end
 
-  def balanced?
+  def balanced?(node = @root)
+    return true if node.nil?
+
+    left = height node.left
+    right = height node.right
+    # Add extra height for non-leaf children
+    left += 1 unless left == 0
+    right += 1 unless right == 0
+
+    (left - right).abs <= 1 and balanced?(node.left) and balanced?(node.right)
   end
 
   def rebalance
