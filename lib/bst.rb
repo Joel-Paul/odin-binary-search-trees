@@ -96,7 +96,17 @@ class Tree
     order
   end
 
-  def preorder
+  def preorder(node = @root, order = [], &block)
+    return if node.nil?
+
+    if block_given?
+      block.call node.data
+    else
+      order << node.data
+    end
+    preorder(node.left, order, &block)
+    preorder(node.right, order, &block)
+    order
   end
 
   def postorder
